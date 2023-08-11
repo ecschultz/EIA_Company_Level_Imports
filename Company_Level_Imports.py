@@ -1,13 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Company Level Exports Refinery Info
+### Company Level Exports Refinery Info
 
 # *** For Questions contact:  Ethan Schultz (ethan.schultz@conocophillips.com) ***
 # EIA webpage: https://www.eia.gov/petroleum/imports/companylevel/archive/
-
-# In[2]:
-
 
 #### Import Packages
 #!pip install schedule
@@ -18,10 +12,6 @@ import win32com.client as win32
 from datetime import datetime
 import schedule
 import time
-
-
-# In[3]:
-
 
 DOMAIN = 'https://www.eia.gov'
 URL = 'https://www.eia.gov/petroleum/imports/companylevel/archive/'
@@ -54,7 +44,6 @@ df = pd.DataFrame(final_list[:30], columns=['Links'])
 ## apply style on the columns
 ##df.style.apply(lambda x: ["text-align:right"]*len(x))
 #######################################################################################
-
 df_list = []
 
 for url in final_list:
@@ -99,7 +88,14 @@ olNS = olApp.GetNameSpace('MAPI')
 mailItem = olApp.CreateItem(0)
 mailItem.Subject = "Company Level Imports (Refiners) Excel File has been updated"
 mailItem.BodyFormat = 1
-mailItem.Body = "Company Level Imports (Refiners) Excel File has been updated.     Refer to: S:\Commercial Assets\Comm Development (ADM095)\Market Analysis (ADM095)\Public Reports\RefineryInfo\Company_level_Imports_Info     To view updated PowerBI view: https://app.powerbi.com/groups/4d98a6f5-8af3-49e8-a85c-5e269e367a09/reports/59078b67-ba17-4664-9698-7919716f0a29"
+mailItem.Body = "Company Level Imports (Refiners) Excel File has been updated. \
+                <br> \
+                <br> \
+                Refer to: S:\Commercial Assets\Comm Development (ADM095)\Market Analysis (ADM095)\Public Reports\RefineryInfo\Company_level_Imports_Info \
+                <br> \
+                <br> \
+                To view updated PowerBI view: https://app.powerbi.com/groups/4d98a6f5-8af3-49e8-a85c-5e269e367a09/reports/59078b67-ba17-4664-9698-7919716f0a29"
+
 mailItem.To = "ethan.schultz@conocophillips.com;Ishk.N.Varghese@conocophillips.com; Kaleb.P.Carr@conocophillips.com; federico.e.zamar@conocophillips.com"
 mailItem.Sensitivity  = 2
 # optional (account you want to use to send the email)
@@ -107,10 +103,3 @@ mailItem.Sensitivity  = 2
 mailItem.Display()
 mailItem.Save()
 mailItem.Send()
-
-
-# In[ ]:
-
-
-
-
